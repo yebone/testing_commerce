@@ -7,10 +7,11 @@ import { BsBag, BsHeart, BsSearch } from "react-icons/bs";
 import { RiCustomerService2Line } from "react-icons/ri";
 import { TfiWorld } from "react-icons/tfi";
 import { useStateContext } from "../context/StateContext";
+import TextBoxForBag from "./TextBoxForBag";
 
 const Navbar = () => {
   const {
-    state: { products },
+    state: { wishListProducts, addToBagProducts },
   } = useStateContext();
 
   return (
@@ -18,8 +19,8 @@ const Navbar = () => {
       <div className="flex justify-between items-center bg-slate-100 m-0 h-[50px]  ">
         <div className="flex gap-2">
           <h1 className="text-2xl cursor-pointer  ">Women</h1>
-          <h1 className="text-2xl cursor-pointer ">Women</h1>
-          <h1 className="text-2xl cursor-pointer ">Women</h1>
+          <h1 className="text-2xl cursor-pointer ">Men</h1>
+          <h1 className="text-2xl cursor-pointer ">Kids</h1>
           <h1 className="text-2xl cursor-pointer ">Women</h1>
         </div>
         <div>
@@ -27,10 +28,18 @@ const Navbar = () => {
         </div>
         <div className="flex gap-2">
           <CgProfile className="text-2xl cursor-pointer " />
-          <BsBag className="text-2xl cursor-pointer " />
+          {/* for add to bag */}
+          <div className=" relative group">
+            <NavLink to={"/cart"} className="flex items-center">
+              <BsBag className="text-2xl cursor-pointer " />
+              <p>{addToBagProducts.length}</p>
+              {/* <TextBoxForBag className=" bg-white shadow-md absolute top-10 z-50 w-500px " /> */}
+            </NavLink>
+          </div>
+
           <NavLink to={"/wishList"} className="flex items-center">
             <BsHeart className="text-2xl cursor-pointer " />
-            <p>{products.length}</p>
+            <p>{wishListProducts.length}</p>
           </NavLink>
 
           <RiCustomerService2Line className="text-2xl cursor-pointer " />

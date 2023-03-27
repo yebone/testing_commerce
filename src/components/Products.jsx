@@ -6,7 +6,8 @@ const Products = () => {
   const {
     info: { products },
   } = productsList1727GoodId12361726;
-  <div></div>;
+
+  console.log(productsList1727GoodId12361726);
 
   return (
     <div className=" flex gap-5 flex-wrap justify-center">

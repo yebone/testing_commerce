@@ -1,19 +1,21 @@
 import React from "react";
 import WishListCard from "../components/WishListCard";
 import { useStateContext } from "../context/StateContext";
+import Navbar from "../components/Navbar";
 
 const WishList = () => {
   const {
-    state: { products },
+    state: { wishListProducts },
   } = useStateContext();
 
   return (
     <div>
+      <Navbar />
       <div>
         <h1>My WishLists</h1>
       </div>
       <div className=" flex gap-5 flex-wrap justify-center">
-        {products?.map((product) => {
+        {wishListProducts?.map((product) => {
           return <WishListCard key={product.goods_id} {...product} />;
         })}
       </div>
