@@ -20,6 +20,9 @@ export const reducer = (state, action) => {
         addToBagProducts: [...state.addToBagProducts, action.payload],
       };
 
+    //updating bag total amount;
+    case "SUBTOTAL_CHANGE":
+
     default:
       return state;
   }

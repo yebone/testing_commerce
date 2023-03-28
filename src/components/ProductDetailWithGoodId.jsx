@@ -16,7 +16,7 @@ const ProductDetailWithGoodId = () => {
   //     currency: "USD",
   //   },
   //   headers: {
-  //     "X-RapidAPI-Key": "9c873acc87msh84cf4f546cc4661p1af758jsnf3c2ab74e001",
+  //     "X-RapidAPI-Key": "",
   //     "X-RapidAPI-Host": "unofficial-shein.p.rapidapi.com",
   //   },
   // };

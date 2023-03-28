@@ -7,7 +7,7 @@ export const StateContextProvider = ({ children }) => {
   const initialState = {
     wishListProducts: [],
     addToBagProducts: [],
-    count: 0,
+    BagTotalAmount: 0,
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   const data = { state, dispatch };

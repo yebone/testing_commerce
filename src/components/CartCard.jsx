@@ -4,16 +4,10 @@ const CartCard = ({
   goods_img,
   goods_name,
   salePrice: { amountWithSymbol, amount },
-  setTotal,
-  total,
+  count,
+  setCount,
 }) => {
-  const [count, setCount] = useState(1);
-  const [itemTotal, setItemTotal] = useState(Number(amount));
-  useEffect(() => {
-    setItemTotal(Number(amount) * count);
-    setTotal(total + itemTotal);
-  }, [count, itemTotal]);
-
+  const subtotal = amount * count;
   return (
     <div className=" flex gap-3 mb-3 ">
       <img
@@ -27,7 +21,7 @@ const CartCard = ({
           <h2>{amountWithSymbol}</h2>
           <div>
             <button
-              onClick={() => (count > 1 ? setCount(count - 1) : count)}
+              onClick={() => setCount(count - 1)}
               className=" font-bold border px-2 py-1 rounded-l-full"
             >
               -
@@ -40,7 +34,7 @@ const CartCard = ({
               +
             </button>
           </div>
-          <h2>{itemTotal}</h2>
+          <h2>{subtotal}</h2>
         </div>
       </div>
     </div>
