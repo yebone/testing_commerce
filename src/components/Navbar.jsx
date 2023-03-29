@@ -7,10 +7,9 @@ import { BsBag, BsHeart } from "react-icons/bs";
 import { RiCustomerService2Line } from "react-icons/ri";
 import { TfiWorld } from "react-icons/tfi";
 import { useStateContext } from "../context/StateContext";
-import TextBoxForBag from "./TextBoxForBag";
 import axios from "axios";
-import { tabKidsType4 } from "../test";
 import SearchBox from "./SearchBox";
+import { navigationRootForDevelopment } from "../storage";
 
 const Navbar = () => {
   const {
@@ -19,18 +18,24 @@ const Navbar = () => {
       addToBagProducts,
       navigationTabs,
       channelType_id,
+      root_id,
     },
     dispatch,
   } = useStateContext();
-  const navTabButtons = document.querySelector(".custom_control");
 
   const [navigationRoots, setNavigationRoots] = useState([]);
   ////development
-  const {
-    info: { content },
-  } = tabKidsType4;
+
   useEffect(() => {
-    setNavigationRoots(content.filter((con, index) => index > 0 && index < 7));
+    const navigationRoot = [];
+    switch (channelType_id) {
+      case "2":
+        return setNavigationRoots(navigationRootForDevelopment.women);
+      case "3":
+        return setNavigationRoots(navigationRootForDevelopment.men);
+      default:
+        return setNavigationRoots([]);
+    }
   }, [channelType_id]);
 
   ////////////////production navigation root request
@@ -114,15 +119,26 @@ const Navbar = () => {
           <TfiWorld className="text-2xl cursor-pointer " />
         </div>
       </div>
-      <div className=" flex shadow-md">
+      <div className=" flex flex-nowrap">
         <div className="w-[60vw] flex flex-nowrap gap-5">
           {navigationRoots?.map((root) => {
             const id = root.id;
+            //for development root name
+            const name = root.name;
+
             return (
               <button
                 key={root.id}
-                onClick={() => dispatch({ type: "ROOT", payload: id })}
-                className="text-sm shadow-sm focus:bg-violet-700 "
+                onClick={() =>
+                  dispatch({
+                    type: "ROOT",
+                    payload: id,
+                    developmentUsage: name,
+                  })
+                }
+                className={`text-sm  hover:border-b-4   ${
+                  root.id === root_id ? "text-red-700 border-b-4" : "opacity-70"
+                }`}
               >
                 {root.name}
               </button>

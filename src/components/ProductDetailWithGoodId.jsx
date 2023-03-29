@@ -1,14 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { goodId2777128 } from "../test";
 
 const ProductDetailWithGoodId = () => {
-  // const [product, setProduct] = useState({});
   const param = useParams();
-  const { info: product } = goodId2777128;
-  console.log(product);
-
+  ////////////production
+  // const [product, setProduct] = useState({});
   // const options = {
   //   method: "GET",
   //   url: "https://unofficial-shein.p.rapidapi.com/products/detail",

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useStateContext } from "../context/StateContext";
-import { productsList1727GoodId12361726 } from "../test";
+import { developmentUsageProductList } from "../storage";
 import ProductsListCard from "./ProductsListCard";
 
 const Products = () => {
@@ -9,12 +9,14 @@ const Products = () => {
   const { nodeContent, state } = useStateContext();
 
   //development environment
-  const {
-    info: { products },
-  } = productsList1727GoodId12361726;
+
   useEffect(() => {
-    setProductList(products);
-  }, []);
+    if (developmentUsageProductList[state.root_name] ? true : false) {
+      setProductList(developmentUsageProductList[state.root_name]);
+    } else {
+      setProductList(developmentUsageProductList["BAGS & LUGGAGE"]);
+    }
+  }, [state.root_name]);
 
   // ////////////////////////Production////
   // // requesting product list with cat_id and goodId;

@@ -20,16 +20,9 @@ const CartCard = ({
       decreaseMainTotal(subtotal);
     }
   }
-  const [ok, setOk] = useState(0);
-  useEffect(() => {
-    console.log("working use effect", ok);
-  });
 
   return (
     <div className=" flex gap-3 mb-3 ">
-      <button className="bg-red-500" onClick={() => setOk(ok + 1)}>
-        click me
-      </button>
       <img
         src={goods_img}
         alt={goods_name}
@@ -54,7 +47,7 @@ const CartCard = ({
               +
             </button>
           </div>
-          <h2>{subtotal.toFixed(2)}</h2>
+          <h2> $ {subtotal.toFixed(2)}</h2>
         </div>
       </div>
     </div>

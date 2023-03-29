@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { reducer } from "./reducer";
-import { nodeContentWomenDress, tabs } from "../test";
+import { nodeContentWomenDress, tabs } from "../storage";
 import axios from "axios";
 
 export const StateContext = createContext();
@@ -23,6 +23,8 @@ export const StateContextProvider = ({ children }) => {
     cat_id: 2030,
     root_id: 30046800294,
     search_key_words: "",
+    //for development purpose
+    root_name: "DRESSES",
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   console.log(state);

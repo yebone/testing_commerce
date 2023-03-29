@@ -12,7 +12,7 @@ const SearchBox = () => {
 
   return (
     <>
-      <div className="flex justify-around gap-2 items-center shadow-orange-300 w-[30vw] h-[40px] rounded-3xl p-3 shadow-sm">
+      <div className="flex justify-around items-center shadow-orange-300 w-[20vw] h-[40px] rounded-3xl p-3 shadow-sm">
         <input
           type="text"
           placeholder="Search"
