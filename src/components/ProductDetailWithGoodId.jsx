@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { goodId2777128 } from "../test";
 
 const ProductDetailWithGoodId = () => {
+  // const [product, setProduct] = useState({});
   const param = useParams();
+  const { info: product } = goodId2777128;
+  console.log(product);
 
   // const options = {
   //   method: "GET",
@@ -16,7 +19,7 @@ const ProductDetailWithGoodId = () => {
   //     currency: "USD",
   //   },
   //   headers: {
-  //     "X-RapidAPI-Key": "",
+  //     "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
   //     "X-RapidAPI-Host": "unofficial-shein.p.rapidapi.com",
   //   },
   // };

@@ -1,31 +1,99 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import { IoLogoJavascript } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
-import { BsBag, BsHeart, BsSearch } from "react-icons/bs";
+import { BsBag, BsHeart } from "react-icons/bs";
 import { RiCustomerService2Line } from "react-icons/ri";
 import { TfiWorld } from "react-icons/tfi";
 import { useStateContext } from "../context/StateContext";
 import TextBoxForBag from "./TextBoxForBag";
+import axios from "axios";
+import { tabKidsType4 } from "../test";
+import SearchBox from "./SearchBox";
 
 const Navbar = () => {
   const {
-    state: { wishListProducts, addToBagProducts },
+    state: {
+      wishListProducts,
+      addToBagProducts,
+      navigationTabs,
+      channelType_id,
+    },
+    dispatch,
   } = useStateContext();
+  const navTabButtons = document.querySelector(".custom_control");
+
+  const [navigationRoots, setNavigationRoots] = useState([]);
+  ////development
+  const {
+    info: { content },
+  } = tabKidsType4;
+  useEffect(() => {
+    setNavigationRoots(content.filter((con, index) => index > 0 && index < 7));
+  }, [channelType_id]);
+
+  ////////////////production navigation root request
+  // const options = {
+  //   method: "GET",
+  //   url: "https://unofficial-shein.p.rapidapi.com/navigations/get-root",
+  //   params: {
+  //     channelType: channelType_id,
+  //     language: "en",
+  //     country: "US",
+  //     currency: "USD",
+  //   },
+  //   headers: {
+  //     "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
+  //     "X-RapidAPI-Host": "unofficial-shein.p.rapidapi.com",
+  //   },
+  // };
+
+  // useEffect(() => {
+  //   axios
+  //     .request(options)
+  //     .then(function (response) {
+  //       console.log("response yay", response.data);
+  //       const {
+  //         info: { content },
+  //       } = response.data;
+  //       console.log(content);
+  //       console.log(content.filter((con) => con.level === "1"));
+  //       setNavigationRoots(
+  //         content.filter((con, index) => index > 0 && index < 7)
+  //       );
+  //     })
+  //     .catch(function (error) {
+  //       console.error(error);
+  //     });
+  // }, [channelType_id]);
+  // console.log("yay navigationRoots", navigationRoots);
 
   return (
-    <div>
-      <div className="flex justify-between items-center bg-slate-100 m-0 h-[50px]  ">
-        <div className="flex gap-2">
-          <h1 className="text-2xl cursor-pointer  ">Women</h1>
-          <h1 className="text-2xl cursor-pointer ">Men</h1>
-          <h1 className="text-2xl cursor-pointer ">Kids</h1>
-          <h1 className="text-2xl cursor-pointer ">Women</h1>
+    <div className="w-full mt-0 mb-5">
+      <div className="flex justify-between items-center bg-slate-100 m-0 mb-2 p-0  ">
+        <div className="flex gap-4">
+          {navigationTabs.map((tab) => {
+            return (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  dispatch({ type: "TAB", payload: tab });
+                }}
+                className={`text-2xl p-3   ${
+                  tab.id === channelType_id
+                    ? "text-red-700 bg-white"
+                    : "opacity-70"
+                }`}
+              >
+                {tab.name}
+              </button>
+            );
+          })}
         </div>
-        <div>
+        {/* <div>
           <IoLogoJavascript className="text-3xl cursor-pointer " />
-        </div>
+        </div> */}
         <div className="flex gap-2">
           <CgProfile className="text-2xl cursor-pointer " />
           {/* for add to bag */}
@@ -46,16 +114,22 @@ const Navbar = () => {
           <TfiWorld className="text-2xl cursor-pointer " />
         </div>
       </div>
-      <div className="flex justify-around gap-2 items-center shadow-orange-300 w-[60vw] h-[40px] rounded-3xl p-3 shadow-sm">
-        <input
-          type="text"
-          placeholder="Search"
-          id="search"
-          className="  placeholder:text-orange-400 focus:outline-none focus:placeholder:text-orange-600 text-orange-300 focus:placeholder:font-bold"
-        />
-        <label htmlFor="search">
-          <BsSearch className=" fill-orange-500 text-2xl" />
-        </label>
+      <div className=" flex shadow-md">
+        <div className="w-[60vw] flex flex-nowrap gap-5">
+          {navigationRoots?.map((root) => {
+            const id = root.id;
+            return (
+              <button
+                key={root.id}
+                onClick={() => dispatch({ type: "ROOT", payload: id })}
+                className="text-sm shadow-sm focus:bg-violet-700 "
+              >
+                {root.name}
+              </button>
+            );
+          })}
+        </div>
+        <SearchBox />
       </div>
     </div>
   );

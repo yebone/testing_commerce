@@ -19,10 +19,27 @@ export const reducer = (state, action) => {
         ...state,
         addToBagProducts: [...state.addToBagProducts, action.payload],
       };
+    // from navbar
+    case "TAB":
+      console.log("tab", action.payload);
+      return {
+        ...state,
+        cat_id: action.payload.cat_id ? action.payload.cat_id : 2030,
+        channelType_id: action.payload.id,
+      };
+    case "ROOT":
+      console.log("root", action.payload);
+      return {
+        ...state,
+        root_id: action.payload ? action.payload : 30046800294,
+      };
+    case "SEARCH_KEY_WORDS":
+      return {
+        ...state,
+        search_key_words: action.payload,
+      };
 
-    //updating bag total amount;
-    case "SUBTOTAL_CHANGE":
-
+    //default
     default:
       return state;
   }

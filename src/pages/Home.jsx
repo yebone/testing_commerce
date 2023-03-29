@@ -4,10 +4,10 @@ import Products from "../components/Products";
 
 const Home = () => {
   return (
-    <div className=" p-0">
+    <>
       <Navbar />
       <Products />
-    </div>
+    </>
   );
 };
 
