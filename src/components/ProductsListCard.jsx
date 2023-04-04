@@ -33,7 +33,7 @@ const ProductsListCard = ({ goods_img, goods_id, goods_name, salePrice }) => {
               payload: { goods_img, goods_id, goods_name, salePrice },
             })
           }
-          className=" text-sm font-bold bg-white px-12 py-2 absolute left-9 top-60 opacity-0 group-hover:opacity-100 "
+          className=" text-sm font-bold bg-white px-12 py-2 absolute left-9 top-60 opacity-0 group-hover:opacity-100 hidden md:block "
         >
           ADD TO BAG
         </button>

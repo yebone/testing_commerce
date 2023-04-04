@@ -11,28 +11,28 @@ const SearchBox = () => {
   }
 
   return (
-    <>
-      <div className="flex justify-around items-center shadow-orange-300 w-[20vw] h-[40px] rounded-3xl p-3 shadow-sm">
-        <input
-          type="text"
-          placeholder="Search"
-          id="search"
-          onChange={handling}
-          className="  placeholder:text-orange-400 focus:outline-none focus:placeholder:text-orange-600 text-orange-300 focus:placeholder:font-bold"
-        />
-        <Link to={`/SearchPage/${search}`}>
-          <label
-            htmlFor="search"
-            onClick={() =>
-              dispatch({ type: "SEARCH_KEY_WORDS", payload: search })
-            }
-          >
-            <BsSearch className=" fill-orange-500 text-2xl cursor-pointer" />
-          </label>
-        </Link>
-      </div>
-    </>
+    <div className=" flex gap-0 ">
+      <input
+        type="text"
+        placeholder="Search"
+        id="search"
+        onChange={handling}
+        className=" p-1 border-2 border-r-0  "
+      />
+      <Link to={`/SearchPage/${search}`}>
+        <label
+          htmlFor="search"
+          onClick={() =>
+            dispatch({ type: "SEARCH_KEY_WORDS", payload: search })
+          }
+        >
+          <BsSearch className=" w-10 h-full p-1  fill-white font-extrabold  text-2xl cursor-pointer bg-black " />
+        </label>
+      </Link>
+    </div>
   );
 };
+{
+}
 
 export default SearchBox;

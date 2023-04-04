@@ -82,7 +82,7 @@ const Products = () => {
   // }, [nodeContent]);
 
   return (
-    <div className=" flex gap-5 flex-wrap justify-center">
+    <div className=" flex gap-5 flex-wrap justify-center ">
       {productList?.map((product) => {
         return <ProductsListCard key={product.goods_id} {...product} />;
       })}

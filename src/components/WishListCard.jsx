@@ -7,13 +7,13 @@ const WishListCard = ({ goods_img, goods_id, goods_name, salePrice }) => {
   const { dispatch } = useStateContext();
 
   return (
-    <div className=" w-[250px] group  ">
+    <div className=" w-[250px] group z-0  ">
       {/* both image and name will direct to detail page and 
      passing goods_id as a param to process get/product/detail request */}
       <div className="relative">
         <Link to={`/productDetail/${goods_id}`}>
           <img
-            className=" object-fill cursor-pointer"
+            className=" object-fill cursor-pointer "
             src={goods_img}
             alt={goods_name}
           />

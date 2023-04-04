@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useStateContext } from "../context/StateContext";
+import axios from "axios";
+import { navigationRootForDevelopment } from "../storage";
+import NavbarForBigScreen from "./NavbarForBigScreen";
+import NavbarForPhoneScreen from "./NavbarForPhoneScreen";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { Link, NavLink } from "react-router-dom";
-
-import { IoLogoJavascript } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { BsBag, BsHeart } from "react-icons/bs";
 import { RiCustomerService2Line } from "react-icons/ri";
 import { TfiWorld } from "react-icons/tfi";
-import { useStateContext } from "../context/StateContext";
-import axios from "axios";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import SearchBox from "./SearchBox";
-import { navigationRootForDevelopment } from "../storage";
+import NavigationTabs from "./NavigationTabs";
+import NavigationRoots from "./NavigationRoots";
 
 const Navbar = () => {
   const {
@@ -74,33 +78,43 @@ const Navbar = () => {
   // }, [channelType_id]);
   // console.log("yay navigationRoots", navigationRoots);
 
+  //////root navigation slide icon
+  function leftSlide() {
+    let slider = document.querySelector("#rootScroll");
+    slider.scrollLeft = slider.scrollLeft + 200;
+  }
+  function rightSlide() {
+    let slider = document.querySelector("#rootScroll");
+    slider.scrollLeft = slider.scrollLeft - 200;
+  }
+
+  const [open, setOpen] = useState(false);
   return (
-    <div className="w-full mt-0 mb-5">
-      <div className="flex justify-between items-center bg-slate-100 m-0 mb-2 p-0  ">
-        <div className="flex gap-4">
-          {navigationTabs.map((tab) => {
-            return (
-              <button
-                key={tab.id}
-                onClick={() => {
-                  dispatch({ type: "TAB", payload: tab });
-                }}
-                className={`text-2xl p-3   ${
-                  tab.id === channelType_id
-                    ? "text-red-700 bg-white"
-                    : "opacity-70"
-                }`}
-              >
-                {tab.name}
-              </button>
-            );
-          })}
+    <nav className=" mb-3">
+      <div className=" bg-slate-50 flex items-center justify-between w-full md:w-auto z-50  p-3 md:p-0 ">
+        {/* menu icon and close icon for mobile view */}
+        {open ? (
+          <AiOutlineClose
+            onClick={() => setOpen(!open)}
+            className="text-3xl md:hidden cursor-pointer"
+          />
+        ) : (
+          <AiOutlineMenu
+            onClick={() => setOpen(!open)}
+            className="text-3xl md:hidden cursor-pointer "
+          />
+        )}
+        {/* nav item for md */}
+        <div className="hidden md:flex">
+          <NavigationTabs
+            dispatch={dispatch}
+            navigationTabs={navigationTabs}
+            channelType_id={channelType_id}
+          />
         </div>
-        {/* <div>
-          <IoLogoJavascript className="text-3xl cursor-pointer " />
-        </div> */}
-        <div className="flex gap-2">
-          <CgProfile className="text-2xl cursor-pointer " />
+        {/* icon for all view port */}
+        <div className="flex gap-2 items-center">
+          <CgProfile className="text-2xl cursor-pointer hidden md:block " />
           {/* for add to bag */}
           <div className=" relative group">
             <NavLink to={"/cart"} className="flex items-center">
@@ -115,39 +129,62 @@ const Navbar = () => {
             <p>{wishListProducts.length}</p>
           </NavLink>
 
-          <RiCustomerService2Line className="text-2xl cursor-pointer " />
-          <TfiWorld className="text-2xl cursor-pointer " />
+          <RiCustomerService2Line className="text-2xl cursor-pointer hidden md:block " />
+          <TfiWorld className="text-2xl cursor-pointer hidden md:block " />
+          <div className=" h-[30px ] md:hidden">
+            <SearchBox />
+          </div>
         </div>
       </div>
-      <div className=" flex flex-nowrap">
-        <div className="w-[60vw] flex flex-nowrap gap-5">
-          {navigationRoots?.map((root) => {
-            const id = root.id;
-            //for development root name
-            const name = root.name;
 
-            return (
-              <button
-                key={root.id}
-                onClick={() =>
-                  dispatch({
-                    type: "ROOT",
-                    payload: id,
-                    developmentUsage: name,
-                  })
-                }
-                className={`text-sm  hover:border-b-4   ${
-                  root.id === root_id ? "text-red-700 border-b-4" : "opacity-70"
-                }`}
-              >
-                {root.name}
-              </button>
-            );
-          })}
+      {/* second tab bar */}
+      <div className=" hidden md:flex justify-between px-3 mt-1 ">
+        <div
+          id="rootScroll"
+          className="w-full  flex gap-5  whitespace-nowrap overflow-x-auto scrollbar-hide "
+        >
+          <NavigationRoots
+            dispatch={dispatch}
+            root_id={root_id}
+            navigationRoots={navigationRoots}
+          />
         </div>
-        <SearchBox />
+        <div className="flex items-center gap-1">
+          <MdKeyboardArrowLeft
+            onClick={leftSlide}
+            className=" text-2xl cursor-pointer hover:text-3xl"
+          />
+          <MdKeyboardArrowRight
+            onClick={rightSlide}
+            className="text-2xl cursor-pointer hover:text-3xl"
+          />
+          <SearchBox />
+        </div>
       </div>
-    </div>
+      {/* mobile drawer */}
+      <ul
+        className={`z-10 
+        md:hidden bg-slate-50 shadow-lg fixed w-full top-16 overflow-y-auto bottom-0  pl-4
+        duration-500 ${open ? "left-[-20%]" : "left-[-100%]"}
+        `}
+      >
+        <div className="ms-20 flex overflow-x-auto scrollbar-hide    ">
+          <NavigationTabs
+            dispatch={dispatch}
+            navigationTabs={navigationTabs}
+            channelType_id={channelType_id}
+          />
+        </div>
+        <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700" />
+        <div className=" ms-20 flex flex-col items-start">
+          <NavigationRoots
+            dispatch={dispatch}
+            root_id={root_id}
+            navigationRoots={navigationRoots}
+          />
+        </div>
+      </ul>
+    </nav>
   );
 };
 
