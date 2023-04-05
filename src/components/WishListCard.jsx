@@ -7,7 +7,7 @@ const WishListCard = ({ goods_img, goods_id, goods_name, salePrice }) => {
   const { dispatch } = useStateContext();
 
   return (
-    <div className=" w-[250px] group z-0  ">
+    <div className="w-[150px] md:w-[250px] group z-0  ">
       {/* both image and name will direct to detail page and 
      passing goods_id as a param to process get/product/detail request */}
       <div className="relative">

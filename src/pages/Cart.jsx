@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CartCard from "../components/CartCard";
 import { useStateContext } from "../context/StateContext";
+import CheckoutNavbar from "../components/CheckoutNavbar";
 
 const Cart = () => {
   const {
@@ -25,7 +26,8 @@ const Cart = () => {
   }
   return (
     <div>
-      <div className=" border shadow-md">
+      <CheckoutNavbar />
+      <div className=" border shadow-md max-w-fit p-3 flex flex-col items-center">
         {addToBagProducts?.map((product) => {
           const [quantity, setQuantity] = useState(1);
 

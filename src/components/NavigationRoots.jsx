@@ -18,7 +18,7 @@ const NavigationRoots = ({ navigationRoots, root_id, dispatch }) => {
                 developmentUsage: name,
               })
             }
-            className={` text-1xl p-3 border-b-2 w-full md:w-fit md:text-sm text-start md:text-sm  hover:border-b-4   ${
+            className={` text-1xl p-3 border-b-2 w-full md:w-fit md:text-sm text-start   hover:border-b-4   ${
               root.id === root_id ? "text-red-700 border-b-4" : "opacity-70"
             }`}
           >

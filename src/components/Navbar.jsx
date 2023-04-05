@@ -111,24 +111,25 @@ const Navbar = () => {
           />
         </div>
         {/* icon for all view port */}
-        <div className="flex gap-2 items-center">
+        {/* p-2 md:text-1xl lg:text-2xl md:p-3 */}
+        <div className="flex gap-3 items-center mr-3">
           <CgProfile className="text-2xl cursor-pointer hidden md:block " />
           {/* for add to bag */}
           <div className=" relative group">
             <NavLink to={"/cart"} className="flex items-center">
-              <BsBag className="text-1xl md:text-2xl cursor-pointer " />
+              <BsBag className="text-1xl md:text-2xl cursor-pointer  " />
               <p>{addToBagProducts.length}</p>
-              {/* <TextBoxForBag className=" bg-white shadow-md absolute top-10 z-50 w-500px " /> */}
+              {/* <TextBoxForBag className=" bg-white shadow-md absolute top-10 z-50 w-500px p-2 md:p-3 "/> */}
             </NavLink>
           </div>
 
           <NavLink to={"/wishList"} className="flex items-center">
-            <BsHeart className="text-1xl md:text-2xl cursor-pointer " />
+            <BsHeart className="text-1xl md:text-2xl cursor-pointer" />
             <p>{wishListProducts.length}</p>
           </NavLink>
 
-          <RiCustomerService2Line className="text-2xl cursor-pointer hidden md:block " />
-          <TfiWorld className="text-2xl cursor-pointer hidden md:block " />
+          <RiCustomerService2Line className="text-2xl cursor-pointer hidden md:block  " />
+          <TfiWorld className="text-2xl cursor-pointer hidden md:block  " />
           <div className=" h-[30px ] md:hidden">
             <SearchBox />
           </div>

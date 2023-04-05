@@ -22,7 +22,7 @@ const CartCard = ({
   }
 
   return (
-    <div className=" flex gap-3 mb-3 ">
+    <div className=" flex gap-3 mb-3 w-[50vw] border-red-400">
       <img
         src={goods_img}
         alt={goods_name}
