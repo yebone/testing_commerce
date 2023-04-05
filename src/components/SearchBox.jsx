@@ -17,7 +17,7 @@ const SearchBox = () => {
         placeholder="Search"
         id="search"
         onChange={handling}
-        className=" p-1 border-2 border-r-0  "
+        className=" w-24 md:w-full h-8 md:h-10 md:p-1 border-2 border-r-0  "
       />
       <Link to={`/SearchPage/${search}`}>
         <label
@@ -26,13 +26,11 @@ const SearchBox = () => {
             dispatch({ type: "SEARCH_KEY_WORDS", payload: search })
           }
         >
-          <BsSearch className=" w-10 h-full p-1  fill-white font-extrabold  text-2xl cursor-pointer bg-black " />
+          <BsSearch className=" text-1xl w-10 h-8 md:p-1 md:h-full  fill-white font-extrabold  md:text-2xl cursor-pointer bg-black " />
         </label>
       </Link>
     </div>
   );
 };
-{
-}
 
 export default SearchBox;

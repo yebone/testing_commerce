@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useStateContext } from "../context/StateContext";
 import axios from "axios";
 import { navigationRootForDevelopment } from "../storage";
-import NavbarForBigScreen from "./NavbarForBigScreen";
-import NavbarForPhoneScreen from "./NavbarForPhoneScreen";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { Link, NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
@@ -118,14 +116,14 @@ const Navbar = () => {
           {/* for add to bag */}
           <div className=" relative group">
             <NavLink to={"/cart"} className="flex items-center">
-              <BsBag className="text-2xl cursor-pointer " />
+              <BsBag className="text-1xl md:text-2xl cursor-pointer " />
               <p>{addToBagProducts.length}</p>
               {/* <TextBoxForBag className=" bg-white shadow-md absolute top-10 z-50 w-500px " /> */}
             </NavLink>
           </div>
 
           <NavLink to={"/wishList"} className="flex items-center">
-            <BsHeart className="text-2xl cursor-pointer " />
+            <BsHeart className="text-1xl md:text-2xl cursor-pointer " />
             <p>{wishListProducts.length}</p>
           </NavLink>
 
