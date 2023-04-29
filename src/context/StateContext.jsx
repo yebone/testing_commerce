@@ -16,7 +16,6 @@ export const StateContextProvider = ({ children }) => {
 
   const initialState = {
     navigationTabs: tabs.info.tabs,
-    wishListProducts: [],
     addToBagProducts: [],
     //id field returned from root button
     channelType_id: 2,

@@ -1,39 +1,31 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { projectDetailId13468318 } from "../storage";
 
-const ProductDetailWithGoodId = () => {
-  const param = useParams();
-  ////////////production
-  // const [product, setProduct] = useState({});
-  // const options = {
-  //   method: "GET",
-  //   url: "https://unofficial-shein.p.rapidapi.com/products/detail",
-  //   params: {
-  //     goods_id: param.goods_id,
-  //     language: "en",
-  //     country: "US",
-  //     currency: "USD",
-  //   },
-  //   headers: {
-  //     "X-RapidAPI-Key": import.meta.env.VITE_API_KEY,
-  //     "X-RapidAPI-Host": "unofficial-shein.p.rapidapi.com",
-  //   },
-  // };
-  // useEffect(() => {
-  //   axios
-  //     .request(options)
-  //     .then(function (response) {
-  //       console.log(response);
-  //       console.log(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }, [param]);
+const ProductDetailWithGoodId = ({ product }) => {
   return (
     <div>
-      <h1>hello i am id</h1>
+      <div className=" flex gap-1 flex-nowrap overflow-auto scrollbar-hide ">
+        {product?.allColorDetailImages[product?.goods_id].map((image) => (
+          <img src={image.origin_image} className="h-[50vh] object-contain" />
+        ))}
+      </div>
+      <div>
+        <h1>{product?.goods_name}</h1>
+        <div className="flex justify-between">
+          <p>{product?.sale_price.amountWithSymbol}</p>
+          <p>rating</p>
+        </div>
+        <div>
+          <h2>Size</h2>
+          <div className="flex gap-3">
+            {Object.keys(product?.attrSizeDict).map((size) => (
+              <p className=" m-1 px-4 py-1 rounded-full border-2">{size}</p>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

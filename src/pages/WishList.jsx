@@ -1,12 +1,12 @@
 import React from "react";
 import WishListCard from "../components/WishListCard";
-import { useStateContext } from "../context/StateContext";
 import Navbar from "../components/Navbar";
+import { useSelector } from "react-redux";
 
 const WishList = () => {
-  const {
-    state: { wishListProducts },
-  } = useStateContext();
+  const wishlistsProducts = useSelector(
+    (state) => state.wishlists.wishlistsProducts
+  );
 
   return (
     <div>
@@ -17,7 +17,7 @@ const WishList = () => {
         </h1>
       </div>
       <div className=" flex gap-5 flex-wrap justify-center">
-        {wishListProducts?.map((product) => {
+        {wishlistsProducts?.map((product) => {
           return <WishListCard key={product.goods_id} {...product} />;
         })}
       </div>

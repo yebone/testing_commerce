@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useStateContext } from "../context/StateContext";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  add_to_wishlists,
+  remove_from_wishlists,
+} from "../features/wishlists/wishListsSlice";
+import { add_to_bag } from "../features/bag/bagSlice";
 
 const ProductsListCard = ({ goods_img, goods_id, goods_name, salePrice }) => {
-  const { state, dispatch } = useStateContext();
+  const wishlistsProducts = useSelector(
+    (state) => state.wishlists.wishlistsProducts
+  );
+  const dispatch = useDispatch();
 
   // toggle state for whishList heart btn
   const [toggle, setToggle] = useState(
-    state.wishListProducts.find((product) => product.goods_id === goods_id)
+    wishlistsProducts.find((product) => product.goods_id === goods_id)
       ? true
       : false
   );
@@ -28,10 +36,7 @@ const ProductsListCard = ({ goods_img, goods_id, goods_name, salePrice }) => {
         {/* Add to bag btn */}
         <button
           onClick={() =>
-            dispatch({
-              type: "ADD_TO_BAG",
-              payload: { goods_img, goods_id, goods_name, salePrice },
-            })
+            dispatch(add_to_bag({ goods_img, goods_id, goods_name, salePrice }))
           }
           className=" text-sm font-bold bg-white px-12 py-2 absolute left-9 top-60 opacity-0 group-hover:opacity-100 hidden md:block "
         >
@@ -48,21 +53,20 @@ const ProductsListCard = ({ goods_img, goods_id, goods_name, salePrice }) => {
             {toggle ? (
               <AiFillHeart
                 className="text-2xl"
-                onClick={() =>
-                  dispatch({
-                    type: "REMOVE_FROM_WISHLIST",
-                    payload: goods_id,
-                  })
-                }
+                onClick={() => dispatch(remove_from_wishlists(goods_id))}
               />
             ) : (
               <AiOutlineHeart
                 className="text-2xl"
                 onClick={() =>
-                  dispatch({
-                    type: "ADD_TO_WISHLIST",
-                    payload: { goods_img, goods_id, goods_name, salePrice },
-                  })
+                  dispatch(
+                    add_to_wishlists({
+                      goods_img,
+                      goods_id,
+                      goods_name,
+                      salePrice,
+                    })
+                  )
                 }
               />
             )}

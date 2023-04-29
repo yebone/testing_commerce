@@ -12,19 +12,19 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import SearchBox from "./SearchBox";
 import NavigationTabs from "./NavigationTabs";
 import NavigationRoots from "./NavigationRoots";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const {
-    state: {
-      wishListProducts,
-      addToBagProducts,
-      navigationTabs,
-      channelType_id,
-      root_id,
-    },
+    state: { navigationTabs, channelType_id, root_id },
     dispatch,
   } = useStateContext();
 
+  const wishlistsProducts = useSelector(
+    (state) => state.wishlists.wishlistsProducts
+  );
+  const bagQuantity = useSelector((state) => state.bag.bagQuantity);
+  console.log(bagQuantity);
   const [navigationRoots, setNavigationRoots] = useState([]);
   ////development
 
@@ -118,14 +118,14 @@ const Navbar = () => {
           <div className=" relative group">
             <NavLink to={"/cart"} className="flex items-center">
               <BsBag className="text-1xl md:text-2xl cursor-pointer  " />
-              <p>{addToBagProducts.length}</p>
+              <p>{bagQuantity}</p>
               {/* <TextBoxForBag className=" bg-white shadow-md absolute top-10 z-50 w-500px p-2 md:p-3 "/> */}
             </NavLink>
           </div>
 
           <NavLink to={"/wishList"} className="flex items-center">
             <BsHeart className="text-1xl md:text-2xl cursor-pointer" />
-            <p>{wishListProducts.length}</p>
+            <p>{wishlistsProducts.length}</p>
           </NavLink>
 
           <RiCustomerService2Line className="text-2xl cursor-pointer hidden md:block  " />
